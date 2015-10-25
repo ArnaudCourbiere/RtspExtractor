@@ -25,3 +25,13 @@ proguard/
 
 # Log Files
 *.log
+
+# Android Studio files
+.DS_Store
+/captures
+.idea
+*.iml
+*.ipr
+*.iws
+classes
+gen-external-apklibs
