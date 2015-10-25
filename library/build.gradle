@@ -24,13 +24,16 @@ model {
      */
     android.ndk {
         moduleName = "rtspextractor"
-        /*
-         * Other ndk flags configurable here are
-         * cppFlags += "-fno-rtti"
-         * cppFlags += "-fno-exceptions"
-         * ldLibs    = ["android", "log"]
-         * stl       = "system"
-         */
+        toolchain = "clang"
+        toolchainVersion = "3.5"
+//        cppFlags  += "-march=armv7-a"
+        cppFlags  += "-mfloat-abi=softfp"
+        cppFlags  += "-mfpu=neon"
+        cppFlags  += "-g"
+        cppFlags  += "-O0"
+        cppFlags  += "-I${file("src/main/jni/include")}".toString()
+        ldFlags   += "-L${file("src/main/jniLibs/")}".toString()
+        ldLibs    += ["log", "z", "m", "avformat-56", "avcodec-56", "swscale-3", "avutil-54", "ssl", "rtmp-1"]
     }
 
     android.buildTypes {
@@ -72,4 +75,5 @@ model {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.google.android.exoplayer:exoplayer:r1.2.3'
 }
