@@ -393,7 +393,7 @@ int ffmpegTest(JNIEnv *env, jobject obj, jstring juri) {
     return EXIT_SUCCESS;
 }
 
-const char *kRtspExtractorClassPath = "me/courbiere/android/ffmpegtest/source/RtspExtractor";
+const char *kRtspExtractorClassPath = "me/courbiere/rtspextractor/RtspExtractor";
 static JNINativeMethod methodTable[] = {
         {"ffInit", "()V", (void*) ffmpegInit},
 		{"ffDeinit", "()V", (void*) ffmpegDeinit},
