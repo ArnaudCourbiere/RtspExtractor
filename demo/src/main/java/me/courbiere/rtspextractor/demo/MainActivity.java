@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import me.courbiere.rtspextractor.R;
+import me.courbiere.rtspextractor.demo.R;
 
 public class MainActivity extends AppCompatActivity {
 

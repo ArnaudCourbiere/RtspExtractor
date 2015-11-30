@@ -3,20 +3,19 @@ apply plugin: 'com.android.model.library'
 model {
     android {
         compileSdkVersion = 23
-        buildToolsVersion = "23.0.1"
+        buildToolsVersion = "23.0.2"
 
         defaultConfig.with {
-            applicationId = "me.courbiere.rtspextractor"
             minSdkVersion.apiLevel = 16
             targetSdkVersion.apiLevel = 23
             versionCode = 1
             versionName = "1.0"
         }
-    }
 
-    compileOptions.with {
-        sourceCompatibility=JavaVersion.VERSION_1_7
-        targetCompatibility=JavaVersion.VERSION_1_7
+        compileOptions.with {
+            sourceCompatibility=JavaVersion.VERSION_1_7
+            targetCompatibility=JavaVersion.VERSION_1_7
+        }
     }
 
     /*
@@ -26,20 +25,20 @@ model {
         moduleName = "rtspextractor"
         toolchain = "clang"
         toolchainVersion = "3.5"
-//        cppFlags  += "-march=armv7-a"
-        cppFlags  += "-mfloat-abi=softfp"
-        cppFlags  += "-mfpu=neon"
-        cppFlags  += "-g"
-        cppFlags  += "-O0"
-        cppFlags  += "-I${file("src/main/jni/include")}".toString()
-        ldFlags   += "-L${file("src/main/jniLibs/")}".toString()
-        ldLibs    += ["log", "z", "m", "avformat-56", "avcodec-56", "swscale-3", "avutil-54", "ssl", "rtmp-1"]
+//        cppFlags.add("-march=armv7-a")
+        cppFlags.add("-mfloat-abi=softfp")
+        cppFlags.add("-mfpu=neon")
+        cppFlags.add("-g")
+        cppFlags.add("-O0")
+        cppFlags.add("-I${file("src/main/jni/include")}".toString())
+        ldFlags.add("-L${file("src/main/jniLibs/")}".toString())
+        ldLibs.addAll(["log", "z", "m", "avformat-56", "avcodec-56", "swscale-3", "avutil-54", "ssl", "rtmp-1"])
     }
 
     android.buildTypes {
         release {
             minifyEnabled = false
-            proguardFiles += file('proguard-rules.pro')
+            proguardFiles.add(file('proguard-rules.pro'))
         }
     }
 
@@ -47,28 +46,38 @@ model {
         // for detailed abiFilter descriptions, refer to "Supported ABIs" @
         // https://developer.android.com/ndk/guides/abis.html#sa
         create("arm") {
-            ndk.abiFilters += "armeabi"
+            ndk.with {
+                abiFilters.add("armeabi")
+                abiFilters.add("armeabi-v7a")
+            }
         }
-        create("arm7") {
-            ndk.abiFilters += "armeabi-v7a"
-        }
-        create("arm8") {
-            ndk.abiFilters += "arm64-v8a"
-        }
+//        create("arm8") {
+//            ndk.with {
+//                abiFilters.add("arm64-v8a")
+//            }
+//        }
         create("x86") {
-            ndk.abiFilters += "x86"
+            ndk.with {
+                abiFilters.add("x86")
+            }
         }
-        create("x86-64") {
-            ndk.abiFilters += "x86_64"
-        }
+//        create("x86-64") {
+//            ndk.with {
+//                abiFilters.add("x86_64")
+//            }
+//        }
         create("mips") {
-            ndk.abiFilters += "mips"
+            ndk.with {
+                abiFilters.add("mips")
+            }
         }
-        create("mips-64") {
-            ndk.abiFilters += "mips64"
-        }
+//        create("mips-64") {
+//            ndk.with {
+//                abiFilters.add("mips64")
+//            }
+//        }
         // To include all cpu architectures, leaves abiFilters empty
-        create("all")
+//        create("all")
     }
 }
 
