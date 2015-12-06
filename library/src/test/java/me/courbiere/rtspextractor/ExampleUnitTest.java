@@ -1,4 +1,4 @@
-package me.courbiere.rtspextractor;
+package me.courbiere.rtspsamplesource;
 
 import org.junit.Test;
 

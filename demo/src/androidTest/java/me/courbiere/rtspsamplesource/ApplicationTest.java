@@ -1,4 +1,4 @@
-package me.courbiere.rtspextractor;
+package me.courbiere.rtspsamplesource;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

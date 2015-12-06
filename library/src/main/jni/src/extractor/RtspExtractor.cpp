@@ -51,7 +51,7 @@ jobjectArray ffmpegGetTrackInfos(JNIEnv *env, jobject obj, jlong formatCtx) {
         return NULL;
     }
 
-    jclass trackInfoClass = env->FindClass("com/google/android/exoplayer/TrackInfo");
+    jclass trackInfoClass = env->FindClass("me/courbiere/rtspsamplesource/TrackInfo");
     if (trackInfoClass == NULL) {
         LOGE("%s: Couldn't find TrackInfo class", __FUNCTION__);
         return NULL;
@@ -123,7 +123,7 @@ void ffmpegSeekTo(JNIEnv *env, jobject obj, jlong formatCtx, jlong positionUs) {
 	AVFormatContext *pFormatCtx = (AVFormatContext*) formatCtx;
 
 	if (avformat_seek_file(pFormatCtx, -1, INT64_MIN, positionUs, INT64_MAX, 0) < 0) {
-		LOGE("%s: Couldn't seek stream to %ld", __FUNCTION__, positionUs);
+		LOGE("%s: Couldn't seek stream to %ld", __FUNCTION__, (long)positionUs);
 	}
 }
 
@@ -393,13 +393,13 @@ int ffmpegTest(JNIEnv *env, jobject obj, jstring juri) {
     return EXIT_SUCCESS;
 }
 
-const char *kRtspExtractorClassPath = "me/courbiere/rtspextractor/RtspExtractor";
+const char *kRtspExtractorClassPath = "me/courbiere/rtspsamplesource/RtspSampleSource$RtspSampleSourceReader";
 static JNINativeMethod methodTable[] = {
-        {"ffInit", "()V", (void*) ffmpegInit},
-		{"ffDeinit", "()V", (void*) ffmpegDeinit},
-        {"ffOpenInput", "(Ljava/lang/String;)J", (void*) ffmpegOpenInput},
-        {"ffCloseInput", "(J)V", (void*) ffmpegCloseInput},
-        {"ffGetTrackInfos", "(J)[Lcom/google/android/exoplayer/TrackInfo;", (void*) ffmpegGetTrackInfos},
+        {"ffInit",       "()V",                   (void *) ffmpegInit},
+        {"ffDeinit",     "()V",                   (void *) ffmpegDeinit},
+        {"ffOpenInput",  "(Ljava/lang/String;)J", (void *) ffmpegOpenInput},
+        {"ffCloseInput", "(J)V",                  (void *) ffmpegCloseInput},
+        {"ffGetTrackInfos", "(J)[me/courbiere/rtspsamplesource/TrackInfo;", (void*) ffmpegGetTrackInfos},
 		{"ffSelectTrack", "(JI)V", (void*) ffmpegSelectTrack},
 		{"ffDeselectTrack", "(JI)V", (void*) ffmpegDeselectTrack},
         {"ffSeekTo", "(JJ)V", (void*) ffmpegSeekTo},

@@ -1,15 +1,25 @@
-package me.courbiere.rtspextractor.demo;
+package me.courbiere.rtspsamplesource.demo;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.SurfaceView;
 import android.view.View;
 
-import me.courbiere.rtspextractor.demo.R;
+import com.google.android.exoplayer.ExoPlayer;
+import com.google.android.exoplayer.MediaCodecVideoTrackRenderer;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String TAG = MainActivity.class.getSimpleName();
+
+    private ExoPlayer mPlayer;
+    private SurfaceView mVideoSurface;
+    private MediaCodecVideoTrackRenderer mVideoRenderer;
+    private Handler mHandler;
+    //private RtspSampleSource mRtspSampleSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
